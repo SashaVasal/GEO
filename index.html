@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Add a GeoJSON polygon</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    max-width: 400px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    </style>
+</head>
+
+<body>
+
+    <div id='map'></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic2FzaGF2YXNhbCIsImEiOiJjam96c3cyNWEwMjZzM2tvZjJpcGkybW12In0.xg2XcCbegeZbVaFSje6ppQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9',
+            center: [129.180466, 61.539044],
+            zoom: 11
+        });
+
+        map.on('load', function() {
+
+            map.addLayer({
+                    'id': 'maine',
+                    'type': 'fill',
+                    'source': {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Polygon',
+                                'coordinates': [
+                                    [
+                                        [-67.13734351262877, 45.137451890638886],
+                                        [-66.96466, 44.8097],
+                                        [-68.03252, 44.3252],
+                                        [-69.06, 43.98],
+                                        [-70.11617, 43.68405],
+                                        [-70.64573401557249, 43.090083319667144],
+                                        [-70.75102474636725, 43.08003225358635],
+                                        [-70.79761105007827, 43.21973948828747],
+                                        [-70.98176001655037, 43.36789581966826],
+                                        [-70.94416541205806, 43.46633942318431],
+                                        [-71.08482, 45.3052400000002],
+                                        [-70.6600225491012, 45.46022288673396],
+                                        [-70.30495378282376, 45.914794623389355],
+                                        [-70.00014034695016, 46.69317088478567],
+                                        [-69.23708614772835, 47.44777598732787],
+                                        [-68.90478084987546, 47.184794623394396],
+                                        [-68.23430497910454, 47.35462921812177],
+                                        [-67.79035274928509, 47.066248887716995],
+                                        [-67.79141211614706, 45.702585354182816],
+                                        [-67.13734351262877, 45.137451890638886]
+                                    ]
+                                ]
+                            }
+                        }
+                    },
+                    'layout': {},
+                    'paint': {
+                        'fill-color': '#088',
+                        'fill-opacity': 0.8
+                    }
+                }),
+                ///////////       
+                map.addLayer({
+                    'id': 'states-layer',
+                    'type': 'fill',
+                    'source': {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'Feature',
+                            "properties": {
+                                "scalerank": 2,
+                                "adm1_code": "USA-3519",
+                                "diss_me": 3519,
+                                "adm1_cod_1": "USA-3519",
+                                "iso_3166_2": "US-WA",
+                                "wikipedia": "http://en.wikipedia.org/wiki/Washington_(state)",
+                                "sr_sov_a3": "US1",
+                                "sr_adm0_a3": "USA",
+                                "iso_a2": "US",
+                                "adm0_sr": 6,
+                                "admin0_lab": 2,
+                                "name": "Washington",
+                                "name_alt": "WA|Wash.",
+                                "name_local": null,
+                                "type": "State",
+                                "type_en": "State",
+                                "code_local": "US53",
+                                "code_hasc": "US.WA",
+                                "note": null,
+                                "hasc_maybe": null,
+                                "region": "West",
+                                "region_cod": null,
+                                "region_big": "Pacific",
+                                "big_code": null,
+                                "provnum_ne": 0,
+                                "gadm_level": 1,
+                                "check_me": 0,
+                                "scaleran_1": 2,
+                                "datarank": 1,
+                                "abbrev": "Wash.",
+                                "postal": "WA",
+                                "area_sqkm": 0,
+                                "sameascity": -99,
+                                "labelrank": 0,
+                                "featurec_1": "Admin-1 scale rank",
+                                "admin": "United States of America",
+                                "name_len": 10,
+                                "mapcolor9": 1,
+                                "mapcolor13": 1,
+                                "featureclass": "Admin-1 scale rank"
+                            },
+                            'geometry': {
+                                'type': 'Polygon',
+                                'coordinates': [
+                                    [
+                                        [129.1701387837621, 61.54199485127537],
+                                        [129.1701870635244, 61.54189756599952],
+                                        [129.17031580955708, 61.541911646782054],
+                                        [129.1703184917661, 61.54188348521058],
+                                        [129.1704230979177, 61.54189500585656],
+                                        [129.17038554699147, 61.5420114921472],
+                                        [129.17025948316777, 61.54200125161176],
+                                        [129.1701387837621, 61.54199485127537]
+                                    ]
+                                ]
+                            }
+                        }
+                    },
+                    'layout': {},
+                    'paint': {
+                        'fill-color': 'rgba(200, 100, 240, 0.4)',
+                        'fill-outline-color': 'rgba(200, 100, 240, 1)'
+                    }
+                })
+            map.on('click', function(e) {
+                //alert(e.id);
+                console.log(e.features[0].properties);
+            });
+
+            // Change the cursor to a pointer when the mouse is over the states layer.
+            map.on('mouseenter', 'states-layer', function() {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'states-layer', function() {
+                map.getCanvas().style.cursor = '';
+            });
+
+
+        })
+
+    </script>
+
+</body>
+
+</html>
