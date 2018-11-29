@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>YktGIS</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/jquery-1.6.4-min.js"></script>
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+<body>
+<div class="container-fluid h-100 p-0 m-0">
+	<div class="row no-gutters w-100 h-100">
+		<div class="ml-3 col-10 w-100 h-100">
+			<div class="row w-100 h-100 no-gutters">
+				<div class="col-12 h-85 pl-2 pt-2">
+					<div class="w-100 h-100 rounded border" id="map"></div>
+
+	<script type="text/javascript">
+		mapboxgl.accessToken = 'pk.eyJ1Ijoic2FzaGF2YXNhbCIsImEiOiJjam96c3cyNWEwMjZzM2tvZjJpcGkybW12In0.xg2XcCbegeZbVaFSje6ppQ';
+	var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+    center: [129.180466, 61.539044],
+    zoom: 15
+});
+map.on('load', function () {
+    // Add a layer showing the state polygons.
+    map.addLayer({
+        'id': 'states-layer',
+        'type': 'fill',
+        'source': {
+            'type': 'geojson',
+            'data': 'https://raw.githubusercontent.com/SashaVasal/GEO/bde3ca50dc81a1590c5b03fc65ca0f4aa5954114/output.geojson'
+        },
+        'paint': {
+            'fill-color': 'rgba(200, 100, 240, 0.4)',
+            'fill-outline-color': 'rgba(200, 100, 240, 1)'
+        }
+    });
+    // When a click event occurs on a feature in the states layer, open a popup at the
+    // location of the click, with description HTML from its properties.
+    map.on('click', 'states-layer', function (e) {
+          console.log(e);
+        	new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.name)
+            .addTo(map);
+    });
+    // Change the cursor to a pointer when the mouse is over the states layer.
+    map.on('mouseenter', 'states-layer', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'states-layer', function () {
+        map.getCanvas().style.cursor = '';
+    });
+});
+</script>
+				</div>
+				<div class="col-12 h-10 pl-2">
+					<button type="button" class="btn btn-outline-danger">Изменить участок</button>
+					<button type="button" class="btn btn-outline-danger" id="open">Посмотреть информацию</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="w-100 h-100 animated fast position-fixed" id="dadreppanel">
+		<div class="h-100 w-40 animated fast rounded-left" id="reportpanel">
+			<ul class="list-group list-group-flush bg-white rounded-left overflow-hidden" style="border:1px solid red">
+			  	<li class="list-group-item py-1 pl-1 bg-danger"><a href="#" id="close"><i class="material-icons small" style="transform:scale(1.7,1.7);color:white">arrow_back</i></a></li>
+			  	<li class="list-group-item">Участок: <span name="name">Ключева</span></li>
+				<li class="list-group-item">Площадь участка: <span name="landarea">64</span> м2</li>
+				<li class="list-group-item">Тип участка: <span name="class">ИЖС</span></li>
+				<li class="list-group-item">Количество квартир: <span name="class">8</span></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
